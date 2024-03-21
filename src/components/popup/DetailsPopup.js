@@ -1,5 +1,9 @@
+import { formatDate } from "../../utilits";
 import Popup from "./Popup";
-const DetailsPopup = ({ open, close }) => {
+const DetailsPopup = ({ data, open, close }) => {
+
+  const startDate = new Date(data.startDate)
+
   return (
     <Popup open={open} close={close}>
       <div className="popup_details">
@@ -12,7 +16,7 @@ const DetailsPopup = ({ open, close }) => {
           />
         </div>
         <div className="portfolio_main_title">
-          <h3>Mockup Phone</h3>
+          <h3>{data.jobTitle}</h3>
           <span>
             <a href="#" onClick={(e) => e.preventDefault()}>
               Details
@@ -23,16 +27,15 @@ const DetailsPopup = ({ open, close }) => {
         <div className="main_details">
           <div className="textbox">
             <p>
-              We live in a world where we need to move quickly and iterate on
-              our ideas as flexibly as possible.
+              {data.summary}
             </p>
-            <p>
-              Mockups are useful both for the creative phase of the project -
-              for instance when {`you're`} trying to figure out your user flows
-              or the proper visual hierarchy - and the production phase when
-              they phase when they will represent the target product. Building
-              mockups strikes the ideal balance ease of modification.
-            </p>
+           {
+            data && data.bulletPoints && data.bulletPoints.map((point) => (
+              <p>
+                {point}
+              </p>
+            ))
+           }
           </div>
           <div className="detailbox">
             <ul>
@@ -48,7 +51,7 @@ const DetailsPopup = ({ open, close }) => {
               </li>
               <li>
                 <span className="first">Date</span>
-                <span>April 22, 2022</span>
+                <span>{formatDate(startDate)}</span>
               </li>
             </ul>
           </div>

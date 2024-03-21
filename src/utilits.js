@@ -264,3 +264,10 @@ export const devman_tm_moving_animation = () => {
 export const lineBreak = (value) => {
   return { __html: value.replace(/\n/g, "<br />") };
 };
+
+
+//format date
+export const formatDate = (date) => {
+  const options = {year: "numeric", month: "long", day: "numeric"};
+  return date.toLocaleDateString("en-US", options)
+}
